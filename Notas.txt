@@ -1,0 +1,33 @@
+INYECCIÓN DE DEPENDENCIAS
+ 
+La inyección de dependencias se rige por el principio de inversión de dependencias. Este principio propone evitar las dependencias
+rígidas entre los componentes, utilizando las siguiente técnicas:
+
+    -Utilizar abstracciones (interfaces)
+    -Hacer que una clase reciba referencias a los componentes que necesita para funcionar 
+
+Un sistema de inyección de dependencias es el encargado de instanciar las clases que necesitemos y suministrarnos ("inyectar") 
+las dependencias enviando los parámetros oportunos al constructor.
+
+Existe otra manera de inyectar dependencias haciendo uso del atributo [Dependency]
+
+En cualquiera de las dos opciones evitamos el uso de implemetaciones concretas mediante el uso de interfaces. El uso de inyección de dependencias nosa da las siguientes
+ventajas:
+
+
+    -Para conocer las dependencias de la clase basta con echar un vistazo a su constructor o a las propiedades decoradas con el atributo usado por el marco de trabajo para 
+    marcar los miembros inyectables, por lo que simplificamos su lectura y facilitamos su comprensión.
+
+    -Los métodos pueden centrarse ahora en lograr su cometido porque las dependencias ya están disponibles a nivel de instancia. Esto nos lleva a disponer de un código 
+    más conciso, limpio, fácil de escribir y de leer.
+
+    -La clase será mucho más reutilizable porque no depende de otros componentes, sino de abstracciones.
+
+    -Podemos realizar fácilmente pruebas unitarias de esta clase de forma aislada, enviándole dependencias falsas o controladas (fakes, stubs, mocks...) 
+    desde los métodos de test.
+
+Existen tres maneras de configurar la inyección de dependencias
+
+    -Scoped -> Una nueva instancia a nivel de clase, no importa se se inyecta varias veces o en distintas partes
+    -Singleton -> única instancia de esa dependencia al nivel de toda la API
+    -Transient

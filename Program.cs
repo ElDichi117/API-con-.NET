@@ -7,19 +7,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Inyección de dependencias
+builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger();//middleware
+    app.UseSwaggerUI();//middleware
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection();//middleware
 
-app.UseAuthorization();
+app.UseAuthorization();//middleware
 
-app.MapControllers();
+//app.UseWelcomePage(); middleware
 
-app.Run();
+app.MapControllers();//middleware
+
+app.Run();//middleware
