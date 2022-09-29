@@ -6,22 +6,28 @@ namespace webapi.Controllers;
 [Route("api/[controller]")]
 public class HelloWorldController:  ControllerBase
 {
-    //Dependencia
     IHelloWorldService helloWorldService;
 
-    //Implementando loggin
-    private readonly ILogger<HelloWorldController> _logger;
+    TareasContext dbcontext;
 
-    //Aquí se recibe la dependencia
-    public HelloWorldController(IHelloWorldService helloWorld, ILogger<HelloWorldController> logger)
+    public HelloWorldController(IHelloWorldService helloWorld, TareasContext db)
     {
-        _logger = logger;
         helloWorldService = helloWorld;
+        dbcontext = db;
     }
 
+    [HttpGet]
     public IActionResult Get()
     {
-        _logger.LogDebug("Logging from Get(). Hi!");
         return Ok(helloWorldService.GetHelloWorld());
+    }
+
+    [HttpGet]
+    [Route("createdb")]
+    public IActionResult CreateDatabase()
+    {
+        dbcontext.Database.EnsureCreated();
+
+        return Ok();
     }
 }
